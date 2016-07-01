@@ -1,5 +1,5 @@
 from math import sqrt
-def sieve(n):
+def sieve2(n):
 
 	nums = range(2, n)
 	primes = []
@@ -16,7 +16,7 @@ def sieve(n):
 
 ### algorithm:
 ### get all prime dividors:
-### using modified version of sieve
+### using modified version of sieve2
 ### the number of divs is the multiplication of the power of the primes
 ### so for example 28 = 2**2*7*1, so we had:
 # 1 = 0, 0
@@ -33,7 +33,7 @@ def sieve(n):
 # and finding the smallest :)
 
 N = 10 ** 5
-sieve_res = sieve(N)
+sieve2_res = sieve2(N)
 k = 500
 print "got primes"
 
@@ -41,7 +41,7 @@ def divs_count(n, to_print = False):
 #n = 28
 	divs = []
 	while n > 1:
-		d =  sieve_res[n-2]
+		d =  sieve2_res[n-2]
 		n /= d
 		divs.append(d)
 	divs_set = set(divs)
@@ -56,7 +56,7 @@ def divs_count2(n, to_print = False):
 	divs = []
 	c = 1
 	while n > 1:
-		d =  sieve_res[n-2]
+		d =  sieve2_res[n-2]
 		exp = 1
 		while n % d == 0:
 			n /= d
