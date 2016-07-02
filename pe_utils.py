@@ -9,6 +9,10 @@ def sieve(n):
 				nums[i*j - 2] = 0
 	return primes
 
+def gcd(a,b):
+	if not b:
+		return a
+	return gcd(b, a%b)
 
 def sieve2(n):
 
