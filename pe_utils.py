@@ -34,3 +34,39 @@ def get_prime_factors(n, sieve_res):
 		n /= d
 		divs.append(d)
 	return divs
+
+
+from random import randrange
+
+def __surely_composite(n, d, s, a):
+    'n-1 == 2**s * d'
+    x = pow(a, d, n) # a^d mod n, efficiently        
+    if x == 1 or x == n - 1:
+        return False
+    for _ in range(s):
+        x = pow(x, 2, n)
+        if x == 1: return True
+        if x == n - 1: return False
+    return True
+
+def miller_rabin(n, number_of_rounds):    
+	''' return True for prime '''
+	(d, s) = n - 1, 0
+	while d % 2 == 0:
+	  	(d, s) = (d//2, s+1)
+    
+	for round in range(number_of_rounds):
+		if __surely_composite(n, d, s, randrange(2, n - 1)):
+			return False
+	return True
+
+primes_set = None
+def is_prime(x, primes = None):
+	global primes_set
+	if not primes and not primes_set:
+		primes_set = set(sieve(10 ** 5))
+	if primes_set and not primes:
+		primes = primes_set
+	if x in primes:
+		return True
+	return miller_rabin(x, 10)
