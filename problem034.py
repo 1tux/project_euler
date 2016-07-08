@@ -23,7 +23,7 @@ def sum_digits(n, f = lambda x : x):
 
 def main():
 	s = 0
-	for i in xrange(3, factorial(9) * 7):
+	for i in xrange(3, factorial(9) * 6):
 		if sum_digits(i, f) == i:
 			s += i
 
