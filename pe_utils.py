@@ -70,3 +70,7 @@ def is_prime(x, primes = None):
 	if x in primes:
 		return True
 	return miller_rabin(x, 10)
+
+def n_choose_k(n, k):
+	from math import factorial as f
+	return f(n) / (f(k) * f(n-k))
