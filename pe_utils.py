@@ -61,6 +61,7 @@ def miller_rabin(n, number_of_rounds):
 	return True
 
 primes_set = None
+small_primes = sieve(1000)
 def is_prime(x, primes = None):
 	global primes_set
 	if not primes and not primes_set:
@@ -69,6 +70,9 @@ def is_prime(x, primes = None):
 		primes = primes_set
 	if x in primes:
 		return True
+	for i in small_primes: # small_primes
+		if x % i == 0:
+			return False
 	return miller_rabin(x, 10)
 
 def n_choose_k(n, k):
