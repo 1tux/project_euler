@@ -1,6 +1,6 @@
-from math import sqrt
 from pe_utils import sieve
-primes_set = set(sieve(10 ** 5))
+from math import sqrt
+#primes_set = set(sieve(10 ** 5))
 print "got primes"
 
 def sum_divs(x):
@@ -13,41 +13,34 @@ def sum_divs(x):
             divs.append(x/i)
     return sum(set(divs))
 
-cache = {}
 
-def chain(n, l = list()):
+def pe95(L = 10**6):
+    d = [1] * L
+    for i in xrange(2, L/2):
+        for j in xrange(i*2, L,i):
+            d[j] += i
 
-	''' for each number cache[n] returns a list '''
+    max_cl = 0
+    for i in xrange(2, L):
+        n, chain = i, []
+        while d[n] < L:
+            d[n], n = L+1, d[n]
+            if n in chain:
+            	k = chain.index(n)
+            	if len(chain[k:]) > max_cl:
+                	max_cl, min_link = len(chain[k:]), min(chain[k:])
+            else:
+            	chain.append(n) 
+            
+    return min_link
 
-	if n in cache:
-		return cache[n]
+print "Smallest member of the longest amicable chain", pe95()
 
-	l2 = list()
-	while
-	new_n = sum_divs(n)
 
-	#print n, l
-	if n > 10 ** 6:
-		for x in l:
-			cache[x] = []
-		return False
-
-		if l and n == l[0]: # found a circle!
-		cache[n] = l
-		return l
-
-	if n in cache:
-		if cache[n] and n == cache[n][0]:
-			return cache[n]
-		return []
-
-	if n in l:
-		cache[n] = l
-		return []
-
-	cache[n] = chain(new_n, l + [n])
-	return cache[n]
-
-for i in xrange(1, 10**5):
-	x = chain(i)
-
+# calculating sum_of_divs for all x | x < 10 ** 6 is too much work ... 
+# should be calculated from down up :)
+'''    d = [1] * L
+    for i in xrange(2, L/2):
+        for j in xrange(i*2, L,i):
+            d[j] += i
+'''
