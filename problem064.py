@@ -82,31 +82,9 @@ def get_period_length(l1):
 		if flag:
 			return i
 
-def create_fraction_from_list(l1,maxi=100):
-	x = F(1)
-	l2 = l1[1:-1]
-	for i in xrange(maxi+1):
-		x = 1/(x + l2[i % len(l2)] )
-	opt1 = l1[0] + x
-
-	return opt1
-
-def get_sum_of_digits(f):
-	return sum(map(int, str(int(f * 10 ** 100)).replace('L','')[:100]))
-
-def do_all(n, maxi=200):
-
-
-	l = sqrt_to_list(n)
-	f = create_fraction_from_list(l, maxi)
-	while abs(f ** 2 - n) > F(0.0000000001):
-		maxi += 1
-		f = create_fraction_from_list(l, maxi)
-	return get_sum_of_digits(f)
-
 #print sqrt_to_list(23)
 #print sqrt_to_list(8)
-'''
+
 c = 0
 N = 10
 for i in xrange(1, N+1):
@@ -118,17 +96,3 @@ for i in xrange(1, N+1):
 		print i, l[:p+2], p
 
 print c	
-'''
-N = 100
-x = 0 
-print do_all(3)
-
-
-for i in xrange(1, N+1):
-	print i
-	maxi = 101
-	if int(sqrt(i)) != sqrt(i):
-		r = do_all(i)
-		x += r
-print x
-
